@@ -1,11 +1,11 @@
 {
   "name": "cminds/module-multiuseraccounts",
-  "description": "N/A",
+  "description": "To Handle the Multi User Accounts",
   "require": {
     "php": "~5.5.0|~5.6.0|~7.0.0|~7.1.0"
   },
   "type": "magento2-module",
-  "version": "1.1.7",
+  "version": "1.1.9",
   "license": [
     "OSL-3.0",
     "AFL-3.0"
