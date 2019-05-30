@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts frontend events config.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_save_before">
+        <observer name="cminds_multiuseraccounts_customer_save_before"
+                  instance="Cminds\MultiUserAccounts\Observer\Customer\SaveBefore"/>
+    </event>
+    <event name="checkout_cart_save_before">
+        <observer name="cminds_multiuseraccounts_checkout_cart_save_before"
+                  instance="Cminds\MultiUserAccounts\Observer\Checkout\Cart\SaveBefore"/>
+    </event>
+    <event name="customer_address_load_after">
+        <observer name="cminds_multiuseraccounts_customer_address_load_after"
+                  instance="Cminds\MultiUserAccounts\Observer\Customer\Address\LoadAfter"/>
+    </event>
+    <event name="customer_address_save_before">
+        <observer name="cminds_multiuseraccounts_customer_address_load_after"
+                  instance="Cminds\MultiUserAccounts\Observer\Customer\Address\LoadAfter"/>
+    </event>
+    <event name="customer_load_after">
+        <observer name="cminds_multiuseraccounts_customer_load_after"
+                  instance="Cminds\MultiUserAccounts\Observer\Customer\LoadAfter"/>
+    </event>
+    <event name="customer_register_success">
+        <observer name="cminds_multiuseraccounts_customer_register_success_manage_subaccounts_update"
+                  instance="Cminds\MultiUserAccounts\Observer\Customer\RegisterSuccess\ManageSubaccountsUpdate"/>
+    </event>
+</config>

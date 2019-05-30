@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts layout update for subaccounts_order_approve_waiting route.
+ *
+ * @category    Cminds
+ * @package     Cminds_MultiUserAccounts
+ * @author      Piotr Pierzak <piotr@cminds.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <update handle="checkout_item_price_renderers"/>
+    <head>
+        <css src="Cminds_MultiUserAccounts::css/subaccounts.css"></css>
+    </head>
+    <body>
+        <referenceBlock name="head.components">
+            <block class="Magento\Framework\View\Element\Js\Components" name="customer_account_edit_head_components"
+                   template="Magento_Customer::js/components.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Orders Waiting For Approval</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Cminds\MultiUserAccounts\Block\Order\Approve\Table" name="subaccounts_order_approve_table"
+                   template="order/approve/table.phtml"
+                   cacheable="false">
+                <block class="Magento\Framework\View\Element\RendererList" name="checkout.cart.item.renderers"
+                       as="renderer.list">
+                    <block class="Magento\Checkout\Block\Cart\Item\Renderer" as="default"
+                           template="Cminds_MultiUserAccounts::order/approve/item/default.phtml"/>
+                    <block class="Magento\Checkout\Block\Cart\Item\Renderer" as="simple"
+                           template="Cminds_MultiUserAccounts::order/approve/item/default.phtml"/>
+                    <block class="Magento\Bundle\Block\Checkout\Cart\Item\Renderer" as="bundle"
+                           template="Cminds_MultiUserAccounts::order/approve/item/default.phtml"/>
+                    <block class="Magento\Checkout\Block\Cart\Item\Renderer" as="virtual"
+                           template="Cminds_MultiUserAccounts::order/approve/item/default.phtml"/>
+                    <block class="Magento\ConfigurableProduct\Block\Cart\Item\Renderer\Configurable" as="configurable"
+                           template="Cminds_MultiUserAccounts::order/approve/item/default.phtml"/>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

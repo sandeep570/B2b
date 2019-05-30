@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts frontend di config.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ * @license  https://www.cminds.com/cm-magento-extentions-license-details CreativeMinds Magento Extensions License
+ * @link     https://www.cminds.com/ecommerce-extensions-store/multi-user-account-extension-for-magento-2-by-creativeminds
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Customer\CustomerData\Customer" type="Cminds\MultiUserAccounts\CustomerData\Customer"/>
+
+    <type name="Cminds\MultiUserAccounts\Controller\AbstractManage">
+        <plugin name="subaccountManageAccessCheck"
+                type="\Cminds\MultiUserAccounts\Controller\Plugin\Manage\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Cminds\MultiUserAccounts\Controller\AbstractOrder">
+        <plugin name="subaccountOrderAccessCheck"
+                type="\Cminds\MultiUserAccounts\Controller\Plugin\Order\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Controller\Account\Edit">
+        <plugin name="subaccountContactInformationEditPagePermission"
+                type="\Cminds\MultiUserAccounts\Controller\Plugin\Permission\Customer\Account\Edit\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Controller\Address">
+        <plugin name="subaccountAddressEditPagePermission"
+                type="\Cminds\MultiUserAccounts\Controller\Plugin\Permission\Customer\Address\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Newsletter\Controller\Manage">
+        <plugin name="subaccountNewsletterSubscriptionEditPagePermission"
+                type="\Cminds\MultiUserAccounts\Controller\Plugin\Permission\Newsletter\Manage\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Cart\Index">
+        <plugin name="subaccountCheckoutCartPagePermission"
+                type="\Cminds\MultiUserAccounts\Controller\Plugin\Permission\Checkout\Cart\Index\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Onepage">
+        <plugin name="subaccountCheckoutPagePermission"
+                type="\Cminds\MultiUserAccounts\Controller\Plugin\Permission\Checkout\Onepage\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\AccountManagement">
+        <plugin name="subaccountAuthentication"
+                type="\Cminds\MultiUserAccounts\Model\Plugin\Customer\AccountManagement\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Controller\Account\LoginPost">
+        <plugin name="subaccountIsActiveCheck"
+                type="\Cminds\MultiUserAccounts\Controller\Plugin\Permission\Customer\Account\LoginPost\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Controller\Account\Confirm">
+        <plugin name="subaccountIsActiveCheck"
+                type="\Cminds\MultiUserAccounts\Controller\Plugin\Permission\Customer\Account\Confirm\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Sales\Block\Order\History">
+        <plugin name="subaccountAllOrders"
+                type="\Cminds\MultiUserAccounts\Block\Plugin\Sales\Order\History\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Sales\Block\Order\Recent">
+        <plugin name="subaccountRecentOrders"
+                type="\Cminds\MultiUserAccounts\Block\Plugin\Sales\Order\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\Block\Onepage\Link">
+        <plugin name="subaccountProceedToCheckoutButton"
+                type="\Cminds\MultiUserAccounts\Block\Plugin\Checkout\Onepage\Link\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\AuthenticationInterface">
+        <plugin name="subaccountCheckIfConfirmed"
+                type="\Cminds\MultiUserAccounts\Model\Plugin\Customer\Authentication\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\ResourceModel\Address\Collection">
+        <plugin name="subaccountReplaceAddressValues"
+                type="\Cminds\MultiUserAccounts\Model\Plugin\Customer\Address\Collection\Load\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Helper\Session\CurrentCustomerAddress">
+        <plugin name="subaccountReplaceDashboardAddresses"
+                type="\Cminds\MultiUserAccounts\Helper\Plugin\Customer\Session\CurrentCustomerAddress\Plugin"
+                sortOrder="10"/>
+    </type>
+</config>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts layout update for admin customer_index_edit route.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_form">
+            <block class="Cminds\MultiUserAccounts\Block\Adminhtml\Customer\Edit\Tab\Subaccount\ManageTab"
+                   name="customer_edit_tab_subaccount_manage">
+                <action method="setTabLabel">
+                    <argument name="label" xsi:type="string">Manage Subaccounts</argument>
+                </action>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

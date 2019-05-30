@@ -1,0 +1,28 @@
+<!--@subject Order Authorization Request @-->
+<!--@vars {
+"var this.getUrl($store, 'admin')":"Warehouse Account URL"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hello %approver_name," approver_name=$data.approver_name}}</p>
+            <p>
+                {{trans "%requester_name has send order to approve." requester_name=$data.requester_name}}
+            </p>
+            <p>
+                {{trans "Before it could be approved it has to be authorized first."}}
+            </p>
+            <p>
+                {{trans "You can authorize this order approval request by clicking on the link below or in orders waiting for approval grid."}}
+            </p>
+            <p>
+                <a href="{{var data.approve_url}}">{{var data.approve_url}}</a>
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

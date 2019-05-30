@@ -1,0 +1,21 @@
+<?php
+/**
+ * Cminds MultiUserAccounts checkout order approve button block template.
+ *
+ * @category    Cminds
+ * @package     Cminds_MultiUserAccounts
+ * @author      Piotr Pierzak <piotr@cminds.com>
+ */
+?>
+<?php
+/**
+ * @var \Cminds\MultiUserAccounts\Block\Checkout\Address\AddressPermission $block
+ */
+?>
+<style>
+    .action-show-popup {
+        <?php if (!$block->isVisible()):?>
+            <?php echo 'display: none;' ?>
+        <?php endif;?>
+    }
+</style>

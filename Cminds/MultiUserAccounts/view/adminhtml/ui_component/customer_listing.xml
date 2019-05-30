@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Cminds MultiUserAccounts customer_listing component update.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ * @license  https://www.cminds.com/cm-magento-extentions-license-details CreativeMinds Magento Extensions License
+ * @link     https://www.cminds.com/ecommerce-extensions-store/multi-user-account-extension-for-magento-2-by-creativeminds
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="customer_columns"
+             class="Magento\Customer\Ui\Component\Listing\Columns">
+        <actionsColumn name="parent_customer"
+                       class="Cminds\MultiUserAccounts\Ui\Customer\Component\Column\ParentCustomer">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Parent Customer</item>
+                    <item name="indexField" xsi:type="string">parent_customer_id</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

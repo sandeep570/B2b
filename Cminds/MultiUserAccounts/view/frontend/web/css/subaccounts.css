@@ -1,0 +1,59 @@
+.subaccounts-manage table.subaccounts tr td.permission ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.subaccounts-manage table.subaccounts tr td.permission ul li {
+    margin: 0;
+}
+
+.subaccounts-manage table.subaccounts tr td.actions form,
+.order-approve-manage table.orders tr td.actions form {
+    display: inline-block;
+}
+
+.order-approve-manage .col.actions a.action.approve {
+    color: #d10029;
+}
+
+.order-approve-manage .col.actions a.action.authorize {
+    color: #d10029;
+}
+
+.order-approve-manage tr.item-info a.product-item-photo {
+    display: table-cell;
+    max-width: 100%;
+    padding-right: 20px;
+    position: static;
+    vertical-align: top;
+    width: 1%;
+}
+
+.order-approve-manage tr.item-info .product-item-details {
+    display: table-cell;
+    vertical-align: top;
+    white-space: normal;
+    width: 99%;
+}
+
+.order-approve-manage tr.item-info span.price {
+    font-weight: normal;
+    font-size: 1.4rem;
+}
+
+.form-edit-account fieldset:nth-child(odd) {
+    float: left;
+}
+
+.form-edit-account fieldset:nth-child(even) {
+    float: right;
+}
+
+.form-edit-account .actions-toolbar {
+    clear: both;
+}
+
+.form-edit-account .field .comment {
+    margin-top: 8px;
+    font-size: 1rem;
+}

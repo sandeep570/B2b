@@ -1,0 +1,24 @@
+<?php
+/**
+ * Cminds MultiUserAccounts checkout order approve button block template.
+ *
+ * @category    Cminds
+ * @package     Cminds_MultiUserAccounts
+ * @author      Piotr Pierzak <piotr@cminds.com>
+ */
+?>
+<?php
+/**
+ * @var \Cminds\MultiUserAccounts\Block\Checkout\Button\OrderApprove $block
+ */
+?>
+<?php if ($block->isVisible()):?>
+    <button type="button"
+            data-role="order-approve"
+            title="<?php /* @escapeNotVerified */ echo __('Request Order Approval') ?>"
+            data-mage-init='{"Cminds_MultiUserAccounts/js/checkout/order-approve":{"requestOrderApprovalUrl":"<?php /* @escapeNotVerified */ echo $block->getRequestOrderApprovalUrl(); ?>"}}'
+            class="action primary checkout<?php echo($block->isDisabled()) ? ' disabled' : ''; ?>"
+            <?php if ($block->isDisabled()):?>disabled="disabled"<?php endif; ?>>
+        <span><?php /* @escapeNotVerified */ echo __('Request Order Approval') ?></span>
+    </button>
+<?php endif?>

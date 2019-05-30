@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts layout update for admin subaccounts_manage_index route.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ * @license  https://www.cminds.com/cm-magento-extentions-license-details CreativeMinds Magento Extensions License
+ * @link     https://www.cminds.com/ecommerce-extensions-store/multi-user-account-extension-for-magento-2-by-creativeminds
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <container name="root" label="Root">
+        <block class="Cminds\MultiUserAccounts\Block\Adminhtml\Customer\Edit\Tab\Subaccount\ManageView"
+               name="adminhtml.customer.edit.tab.subaccount.manage"/>
+    </container>
+</layout>

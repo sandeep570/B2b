@@ -1,0 +1,24 @@
+<?php
+/**
+ * Cminds MultiUserAccounts permission reditect template.
+ *
+ * @category    Cminds
+ * @package     Cminds_MultiUserAccounts
+ * @author      Piotr Pierzak <piotr@cminds.com>
+ */
+?>
+<?php
+/**
+ * @var \Cminds\MultiUserAccounts\Block\Permission\Redirect $block
+ */
+?>
+<form id="permissionRedirectForm" action="<?php echo $block->getRedirectUrl() ?>" method="post"></form>
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $(function () {
+            setTimeout(function() {
+                $('#permissionRedirectForm').submit();
+            }, 10);
+        });
+    });
+</script>

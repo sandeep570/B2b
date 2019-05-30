@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts frontend di config.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ * @license  https://www.cminds.com/cm-magento-extentions-license-details CreativeMinds Magento Extensions License
+ * @link     https://www.cminds.com/ecommerce-extensions-store/multi-user-account-extension-for-magento-2-by-creativeminds
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Ui\Component\DataProvider">
+        <plugin name="subaccountCustomerDataProvider"
+                type="\Cminds\MultiUserAccounts\Ui\Plugin\Customer\Component\DataProvider\Plugin"
+                sortOrder="10"/>
+    </type>
+</config>

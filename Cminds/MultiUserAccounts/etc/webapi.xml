@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Parent Accounts. -->
+    <route url="/V1/parentaccount/:parentId" method="GET">
+        <service class="Cminds\MultiUserAccounts\Api\ParentaccountInterface"
+                 method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/parentaccount" method="POST">
+        <service class="Cminds\MultiUserAccounts\Api\ParentaccountInterface"
+                 method="create"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/parentaccount/:parentId" method="PUT">
+        <service class="Cminds\MultiUserAccounts\Api\ParentaccountInterface"
+                 method="updateById"/>
+        <resources>
+            <resource ref="Magento_Customer::customer"/>
+        </resources>
+    </route>
+    <route url="/V1/parentaccount/:parentId" method="DELETE">
+        <service class="Cminds\MultiUserAccounts\Api\ParentaccountInterface"
+                 method="deleteById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Subaccount. -->
+    <route url="/V1/parentaccount/:parentId/subaccounts" method="GET">
+        <service class="Cminds\MultiUserAccounts\Api\SubaccountInterface"
+                 method="getAllSubs"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/parentaccount/:parentId/subaccounts/:subAId" method="GET">
+        <service class="Cminds\MultiUserAccounts\Api\SubaccountInterface"
+                 method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/parentaccount/:parentId/subaccounts" method="POST">
+        <service class="Cminds\MultiUserAccounts\Api\SubaccountInterface"
+                 method="create"/>
+        <resources>
+            <resource ref="Cminds_MultiUserAccounts::manage_subaccounts"/>
+        </resources>
+    </route>
+    <route url="/V1/parentaccount/:parentId/subaccounts/:subId" method="PUT">
+        <service class="Cminds\MultiUserAccounts\Api\SubaccountInterface"
+                 method="updateById"/>
+        <resources>
+            <resource ref="Cminds_MultiUserAccounts::manage_subaccounts"/>
+        </resources>
+    </route>
+    <route url="/V1/parentaccount/:parentId/subaccounts/:subId" method="DELETE">
+        <service class="Cminds\MultiUserAccounts\Api\SubaccountInterface"
+                 method="deleteById"/>
+        <resources>
+            <resource ref="Cminds_MultiUserAccounts::manage_subaccounts"/>
+        </resources>
+    </route>
+</routes>

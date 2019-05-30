@@ -1,0 +1,102 @@
+<?php
+/**
+ * Cminds MultiUserAccounts manage subaccounts table template.
+ *
+ * @category    Cminds
+ * @package     Cminds_MultiUserAccounts
+ * @author      Piotr Pierzak <piotr@cminds.com>
+ */
+?>
+<?php
+/**
+ * @var \Cminds\MultiUserAccounts\Block\Manage\Table $block
+ */
+?>
+<?php $manageFlag = $block->canManageSubaccounts()?>
+<?php $editFlag = $block->getSubbaccountEditPermission()?>
+<?php $canManageSub = $block->getCanManageSubaccounts(); ?>
+<?php $subaccounts = $block->getSubaccounts(); ?>
+
+<?php if ($subaccounts && count($subaccounts)) : ?>
+<?php if(!$editFlag && $canManageSub === 0) {echo '<div class="message info empty"><span>Administrator disabled edition and creation of subaccounts</span></div>';}?>
+    <div class="table-wrapper subaccounts-manage">
+        <table class="data table table-order-items subaccounts" id="subaccounts-manage-table">
+            <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Subaccounts') ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col date"><?php /* @escapeNotVerified */ echo __('Email') ?></th>
+                <th scope="col" class="col shipping"><?php /* @escapeNotVerified */ echo __('Name') ?></th>
+                <th scope="col" class="col total"><?php /* @escapeNotVerified */ echo __('Permission') ?></th>
+                <th scope="col" class="col status"><?php /* @escapeNotVerified */ echo __('Status') ?></th>
+                <th scope="col" class="col actions">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($subaccounts as $subaccount): ?>
+                <?php
+                $subaccountName = $block->getSubaccountName($subaccount);
+                $permission = $block->getSubaccountPermissionDescriptionHtml($subaccount);
+                $status = $block->getSubaccountStatus($subaccount);
+                ?>
+                <tr>
+                    <td data-th="<?php echo $block->escapeHtml(__('Email')) ?>"
+                        class="col email"><?php echo $block->escapeHtml($subaccount->getEmail()) ?></td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Name')) ?>"
+                        class="col name"><?php echo $block->escapeHtml($subaccountName) ?></td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Permission')) ?>"
+                        class="col permission"><?php echo $block->escapeHtml($permission, ['ul', 'li']) ?></td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Status')) ?>"
+                        class="col status"><?php echo $block->escapeHtml($status) ?></td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>"
+                        class="col actions">
+                        <a href="<?php /* @escapeNotVerified */ echo $block->getEditUrl($subaccount);?>"
+                           class="<?php echo 'action edit';?>">
+                            <span><?php /* @escapeNotVerified */ echo __('Edit') ?></span>
+                        </a>
+                        <form action="<?php /* @escapeNotVerified */ echo $block->getDeleteUrl($subaccount);?>"<?php if(!$canManageSub){echo 'style=display:none;';} ?>method="post">
+                            <a href="#" class="<?php echo 'action delete';?>">
+                                <span><?php /* @escapeNotVerified */ echo __('Delete') ?></span>
+                            </a>
+                        </form>
+                        <?php if (!$canManageSub) {?>
+                        <a href="#" style="color:#d10029;">
+                            <span><?php /* @escapeNotVerified */ echo __('Delete') ?></span>
+                        </a>
+                        <?php }?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            require([ 'jquery'], function($) {
+                $(function() {
+                    $('#subaccounts-manage-table a.delete').bind('click', function() {
+                        if (confirm('<?php echo __('Are you sure that you want to delete this subaccount?') ?>')) {
+                            $(this).closest('form').submit();
+                        }
+                    });
+                });
+            });
+        </script>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?php /* @escapeNotVerified */ echo __('There are not subaccounts to display.'); ?></span>
+    </div>
+<?php endif ?>
+
+<form class="form subaccounts-manage"
+      action="<?php /* @escapeNotVerified */ echo $block->getFormActionUrl();?>"
+      method="post"
+      id="subaccounts-manage-add-user">
+    <div class="actions">
+        <button type="submit" class="action add-user primary"
+                title="<?php /* @escapeNotVerified */ echo __('Add Subaccount') ?>"<?php if(!$canManageSub) {echo 'disabled';}?>>
+            <span><?php /* @escapeNotVerified */ echo __('Add Subaccount') ?></span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts config.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <subaccount>
+            <general>
+                <enable>0</enable>
+                <shared_session>0</shared_session>
+                <notification>1</notification>
+            </general>
+            <new_subaccount>
+                <confirm>0</confirm>
+            </new_subaccount>
+            <order_approval_request>
+                <authorization_required>0</authorization_required>
+            </order_approval_request>
+            <email>
+                <checkout_order_approve_request>
+                    <template>cminds_multiuseraccounts_checkout_order_approve_request</template>
+                </checkout_order_approve_request>
+                <checkout_order_approved>
+                    <template>cminds_multiuseraccounts_checkout_order_approved</template>
+                </checkout_order_approved>
+                <checkout_order_authorization_request>
+                    <template>cminds_multiuseraccounts_checkout_order_authorization</template>
+                </checkout_order_authorization_request>
+            </email>
+        </subaccount>
+        <parentaccount>
+            <general>
+                <can_manage>1</can_manage>
+            </general>
+            <new_customer>
+                <can_manage>1</can_manage>
+            </new_customer>
+            <order_approval_request>
+                <parentaccount_all_notification>1</parentaccount_all_notification>
+            </order_approval_request>
+        </parentaccount>
+    </default>
+</config>

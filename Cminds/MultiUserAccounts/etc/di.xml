@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts di config.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Cminds\MultiUserAccounts\Model\AuthenticationStateInterface"
+                type="Cminds\MultiUserAccounts\Model\AuthenticationState"/>
+    <preference for="Cminds\MultiUserAccounts\Api\SubaccountRepositoryInterface"
+                type="Cminds\MultiUserAccounts\Model\ResourceModel\SubaccountRepository"/>
+    <preference for="Cminds\MultiUserAccounts\Api\Data\SubaccountInterface"
+                type="Cminds\MultiUserAccounts\Model\Data\Subaccount"/>
+    <preference for="Cminds\MultiUserAccounts\Api\SubaccountTransportRepositoryInterface"
+                type="Cminds\MultiUserAccounts\Model\ResourceModel\SubaccountTransportRepository"/>
+    <preference for="Cminds\MultiUserAccounts\Api\Data\SubaccountTransportInterface"
+                type="Cminds\MultiUserAccounts\Model\Data\SubaccountTransport"/>
+    <preference for="Cminds\MultiUserAccounts\Api\ParentaccountInterface"
+                type="Cminds\MultiUserAccounts\Model\Api\Parentaccount" />
+    <preference for="Cminds\MultiUserAccounts\Api\SubaccountInterface"
+                type="Cminds\MultiUserAccounts\Model\Api\Subaccount" />
+    <preference for="Cminds\MultiUserAccounts\Api\Data\ApiParentAccountInterface"
+                type="Cminds\MultiUserAccounts\Model\Data\ApiParentAccount" />
+    <preference for="Cminds\MultiUserAccounts\Api\Data\ApiSubAccountInterface"
+                type="Cminds\MultiUserAccounts\Model\Data\ApiSubAccount" />
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="cminds_multiuseraccounts_import"
+                      xsi:type="object">Cminds\MultiUserAccounts\Console\Command\ImportCommand</item>
+                <item name="cminds_multiuseraccounts_generate_sample_import_file"
+                      xsi:type="object">Cminds\MultiUserAccounts\Console\Command\GenerateSampleImportFileCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Webapi\ServiceInputProcessor">
+        <plugin name="serviceInputProcessorMultiUserApi"
+                type="\Cminds\MultiUserAccounts\Model\Plugin\Webapi\ServiceInputProcessor\Plugin"
+                sortOrder="1"/>
+    </type>
+
+    <type name="Magento\Customer\Model\Customer">
+        <plugin name="subaccountImportDisableWelcomeEmail"
+                type="\Cminds\MultiUserAccounts\Model\Plugin\Customer\Customer\Plugin"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Model\EmailNotification">
+        <plugin name="subaccountImportDisableWelcomeNotificationEmail"
+                type="\Cminds\MultiUserAccounts\Model\Plugin\Customer\EmailNotification\Plugin"
+                sortOrder="10"/>
+    </type>
+</config>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts layout update for subaccounts_nopermission route.
+ *
+ * @category    Cminds
+ * @package     Cminds_MultiUserAccounts
+ * @author      Piotr Pierzak <piotr@cminds.com>
+ */
+-->
+<page layout="empty" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="root">
+            <referenceContainer name="after.body.start" remove="true"/>
+            <referenceContainer name="page.wrapper" remove="true"/>
+            <referenceContainer name="page.bottom.container" remove="true"/>
+            <referenceContainer name="before.body.end" remove="true"/>
+
+            <block class="Cminds\MultiUserAccounts\Block\Permission\Redirect"
+                   name="cminds.multiuseraccounts.permission.redirect"
+                   template="permission/redirect.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

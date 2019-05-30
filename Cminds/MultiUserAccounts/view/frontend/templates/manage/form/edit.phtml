@@ -1,0 +1,246 @@
+<?php
+/**
+ * Cminds MultiUserAccounts frontend subaccount edit template.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ */
+?>
+<?php
+/** @var \Cminds\MultiUserAccounts\Block\Manage\Form\Edit $block */
+?>
+<?php $canManageSub = $block->getCanManageSubaccounts(); ?>
+<form class="form form-edit-account"
+      action="<?php echo $block->escapeUrl($block->getFormActionUrl()) ?>"
+      method="post"
+      id="form-validate"
+      enctype="multipart/form-data"
+      data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>"
+      autocomplete="off">
+
+    <fieldset class="fieldset info">
+        <?php echo $block->getBlockHtml('formkey')?>
+        <legend class="legend">
+            <span><?php /* @escapeNotVerified */ echo __('Subaccount Information') ?></span>
+        </legend><br>
+
+        <?php if ($block->getSubaccount()->getId()) : ?>
+        <input type="hidden"
+               name="id"
+               value="<?php echo $block->escapeHtml($block->getSubaccount()->getId()) ?>"/>
+        <?php endif; ?>
+
+        <div class="field field-name-firstname required">
+            <label class="label"
+                   for="firstname">
+                <span><?php /* @escapeNotVerified */ echo __('First Name') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       id="firstname"
+                       name="firstname"
+                       title="<?php /* @escapeNotVerified */ echo __('First Name') ?>"
+                       class="input-text required-entry"
+                       data-validate="{required:true}"
+                       value="<?php echo $block->escapeHtml($block->getSubaccount()->getFirstname()) ?>"
+                <?php if ($canManageSub) {echo '';} else {echo 'disabled';} ?>/>
+            </div>
+        </div>
+
+        <div class="field field-name-lastname required">
+            <label class="label"
+                   for="lastname">
+                <span><?php /* @escapeNotVerified */ echo __('Last Name') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       id="lastname"
+                       name="lastname"
+                       title="<?php /* @escapeNotVerified */ echo __('Last Name') ?>"
+                       class="input-text required-entry"
+                       data-validate="{required:true}"
+                       value="<?php echo $block->escapeHtml($block->getSubaccount()->getLastname()) ?>"
+                    <?php if ($canManageSub) {echo '';} else {echo 'disabled';} ?>/>
+            </div>
+        </div>
+
+        <div class="field field-name-email required">
+            <label class="label"
+                   for="email">
+                <span><?php /* @escapeNotVerified */ echo __('Email') ?></span>
+            </label>
+            <div class="control">
+                <input type="email"
+                       id="email"
+                       name="email"
+                       title="<?php /* @escapeNotVerified */ echo __('Email') ?>"
+                       class="input-text"
+                       data-validate="{required:true, 'validate-email':true}"
+                       value="<?php echo $block->escapeHtml($block->getSubaccount()->getEmail()) ?>"
+                    <?php if ($canManageSub) {echo '';} else {echo 'disabled';} ?>/>
+            </div>
+        </div>
+
+        <div class="field field-name-is-active required">
+            <?php $customerId = $block->getSubaccount()->getCustomerId(); $isActive = null;?>
+            <?php if ($customerId !== null) {$isActive = $block->getIsActive($customerId); }?>
+            <?php if ($isActive === null) {$isActive = 1; }?>
+            <input type="checkbox"
+                   name="is_active"
+                   id="is-active"
+                   value="1"
+                   title="<?php /* @escapeNotVerified */ echo __('Is Active') ?>"
+                   class="checkbox" <?php if ($isActive): ?>checked="checked"<?php endif; ?>/>
+            <label class="label"
+                   for="is-active">
+                <span><?php /* @escapeNotVerified */ echo __('Is Active') ?></span>
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="fieldset access">
+        <legend class="legend">
+            <span><?php /* @escapeNotVerified */ echo __('Password') ?></span>
+        </legend><br>
+
+        <div class="field password required">
+            <label class="label"
+                   for="password">
+                <span><?php /* @escapeNotVerified */ echo __('Password') ?></span>
+            </label>
+            <div class="control">
+                <input type="password"
+                       class="input-text"
+                       name="password"
+                       id="password"
+                       autocomplete="off"
+                    <?php if ($canManageSub) {echo '';} else {echo 'disabled';} ?>/>
+            </div>
+        </div>
+        <div class="field confirm password required">
+            <label class="label"
+                   for="password-confirmation">
+                <span><?php /* @escapeNotVerified */ echo __('Confirm Password') ?></span>
+            </label>
+            <div class="control">
+                <input type="password"
+                       class="input-text"
+                       name="password_confirmation"
+                       id="password-confirmation"
+                       autocomplete="off"
+                    <?php if ($canManageSub) {echo '';} else {echo 'disabled';} ?>/>
+            </div>
+        </div>
+        <?php $showTaxVat = $block->showTaxVatConfiguration(); ?>
+        <?php if (!empty($showTaxVat)) : ?>
+            <?php $loggedCustomerData = $block->getLoggedCustomerData(); ?>
+            <div class="field taxvat <?php if ($showTaxVat === 'req') echo 'required'; ?>">
+                <label class="label"
+                       for="password-confirmation">
+                    <span><?php /* @escapeNotVerified */ echo __('Tax/VAT Number') ?></span>
+                </label>
+                <div class="control">
+                    <input type="text"
+                           value="<?php /* @escapeNotVerified */ echo $loggedCustomerData->getTaxvat(); ?>"
+                           class="input-text"
+                           name="taxvat"
+                           id="taxvat"/>
+                </div>
+            </div>
+        <?php endif; ?>
+    </fieldset>
+
+    <fieldset class="fieldset permissions">
+        <legend class="legend">
+            <span><?php /* @escapeNotVerified */ echo __('Permissions') ?></span>
+        </legend><br>
+
+        <?php $permissions = $block->getPermissions(); ?>
+        <?php foreach ($permissions as $permissionCode => $permissionData) : ?>
+            <div class="field <?php echo $block->getPermissionHtmlId($permissionCode) ?>">
+                <?php $permission = $block->getSubaccount()->{$block->getPermissionGetter($permissionCode)}(); ?>
+                <input type="checkbox"
+                       name="<?php echo $permissionCode ?>"
+                       id="<?php echo $block->getPermissionHtmlId($permissionCode) ?>"
+                       value="1"
+                       title="<?php /* @escapeNotVerified */ echo $permissionData['description'] ?>"
+                       class="checkbox" <?php if ($permission): ?>checked="checked"<?php endif; ?>/>
+                <label class="label" for="<?php echo $block->getPermissionHtmlId($permissionCode) ?>">
+                    <span><?php /* @escapeNotVerified */ echo $permissionData['description'] ?></span>
+                </label>
+            </div>
+        <?php endforeach; ?>
+    </fieldset>
+
+    <fieldset class="fieldset additional-configuration">
+        <legend class="legend">
+            <span><?php /* @escapeNotVerified */ echo __('Additional Configuration') ?></span>
+        </legend><br>
+
+        <div class="field field-name-manage-order-max-amount">
+            <label class="label"
+                   for="manage_order_max_amount">
+                <span><?php /* @escapeNotVerified */ echo __('Order Amount Without Approval') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       id="manage_order_approval_permission_amount"
+                       name="additional_information[manage_order_max_amount]"
+                       title="<?php /* @escapeNotVerified */ echo __('Order Amount Without Approval') ?>"
+                       class="input-text required-entry"
+                       data-validate="{required:false}"
+                       value="<?php echo $block->escapeHtml($block->getSubaccount()->getAdditionalInformationValue('manage_order_max_amount')) ?>"/>
+            </div>
+            <div class="comment">
+                <?php
+                echo __(
+                    'No value or 0 is equal to no limit. "Can Create Order" '
+                    . 'permission has to be set.'
+                );
+                ?>
+            </div>
+        </div>
+
+        <div class="field field-name-manage-order-approval-permission-amount">
+            <label class="label"
+                   for="manage_order_approval_permission_amount">
+                <span><?php /* @escapeNotVerified */ echo __('Order Approval Permission Amount') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       id="manage_order_approval_permission_amount"
+                       name="additional_information[manage_order_approval_permission_amount]"
+                       title="<?php /* @escapeNotVerified */ echo __('Order Approval Permission Amount') ?>"
+                       class="input-text required-entry"
+                       data-validate="{required:false}"
+                       value="<?php echo $block->escapeHtml($block->getSubaccount()->getAdditionalInformationValue('manage_order_approval_permission_amount')) ?>"/>
+            </div>
+            <div class="comment">
+                <?php
+                echo __(
+                    'Sub-account will be allowed to approve orders with amount '
+                    . 'not bigger than above amount. No value or 0 is equal to '
+                    . 'no limit. "Can Approve Orders" permission has to be set.'
+                );
+                ?>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit"
+                    class="action save primary"
+                    title="<?php /* @escapeNotVerified */ echo __('Save') ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Save') ?></span>
+            </button>
+        </div>
+        <div class="secondary">
+            <a class="action back"
+               href="<?php echo $block->escapeUrl($block->getBackUrl()) ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Go back') ?></span>
+            </a>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts layout update for checkout_cart_index route.
+ *
+ * @category    Cminds
+ * @package     Cminds_MultiUserAccounts
+ * @author      Piotr Pierzak <piotr@cminds.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="checkout.cart.methods">
+            <block class="Cminds\MultiUserAccounts\Block\Checkout\Button\OrderApprove"
+                   name="cminds.multiuseraccounts.checkout.button.orderapprove"
+                   template="checkout/button/order_approve.phtml"
+                   after="checkout.cart.methods.onepage.bottom"/>
+        </referenceContainer>
+    </body>
+</page>

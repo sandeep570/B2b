@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts events config.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ * @license  https://www.cminds.com/cm-magento-extentions-license-details CreativeMinds Magento Extensions License
+ * @link     https://www.cminds.com/ecommerce-extensions-store/multi-user-account-extension-for-magento-2-by-creativeminds
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="subaccount_save_before">
+        <observer name="cminds_multiuseraccounts_subaccount_save_before"
+                  instance="Cminds\MultiUserAccounts\Observer\Subaccount\SaveBefore"/>
+    </event>
+    <event name="checkout_submit_all_after">
+        <observer name="cminds_multiuseraccounts_checkout_submit_all_after"
+                  instance="Cminds\MultiUserAccounts\Observer\Checkout\Quote\SubmitAllAfter"/>
+    </event>
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="cminds_multiuseraccounts_sales_model_service_quote_submit_before"
+                  instance="Cminds\MultiUserAccounts\Observer\Sales\Service\Quote\SubmitBefore"/>
+    </event>
+    <event name="checkout_submit_before">
+        <observer name="cminds_multiuseraccounts_checkout_submit_before"
+                  instance="Cminds\MultiUserAccounts\Observer\Checkout\Quote\SubmitBefore"/>
+    </event>
+    <event name="customer_save_after">
+        <observer name="cminds_multiuseraccounts_customer_save_after_subaccount_update"
+                  instance="Cminds\MultiUserAccounts\Observer\Customer\SaveAfter\SubaccountUpdate"/>
+    </event>
+    <event name="checkout_cart_update_items_before">
+        <observer name="cminds_multiuseraccounts_checkout_cart_update_items_before"
+                  instance="Cminds\MultiUserAccounts\Observer\Checkout\Cart\UpdateItemsBefore"/>
+    </event>
+    <event name="checkout_cart_product_add_after">
+        <observer name="cminds_multiuseraccounts_checkout_cart_product_add_after"
+                  instance="Cminds\MultiUserAccounts\Observer\Checkout\Cart\ProductAddAfter"/>
+    </event>
+    <event name="sales_model_service_quote_submit_success">
+        <observer name="sendEmail" disabled="true"/>
+    </event>
+</config>

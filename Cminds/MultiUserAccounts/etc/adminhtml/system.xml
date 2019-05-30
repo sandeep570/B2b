@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts adminhtml system config.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cminds_multiuseraccounts"
+             translate="label"
+             sortOrder="1000"
+             class="cminds-logo">
+            <label>Cminds Multi User Accounts</label>
+        </tab>
+        <section id="subaccount"
+                 translate="label"
+                 type="text"
+                 sortOrder="120"
+                 showInDefault="1"
+                 showInWebsite="1"
+                 showInStore="1">
+            <label>Subaccounts Configuration</label>
+            <tab>cminds_multiuseraccounts</tab>
+            <resource>Cminds_MultiUserAccounts::configuration</resource>
+            <group id="general"
+                   translate="label"
+                   type="text"
+                   sortOrder="10"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>General Options</label>
+                <field id="enable"
+                       translate="label"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="shared_session"
+                       translate="label"
+                       type="select"
+                       sortOrder="20"
+                       showInDefault="1"
+                       showInWebsite="0"
+                       showInStore="0">
+                    <label>Shared Session</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="notification"
+                       translate="label"
+                       type="select"
+                       sortOrder="30"
+                       showInDefault="1"
+                       showInWebsite="0"
+                       showInStore="0">
+                    <label>Send notifications To</label>
+                    <source_model>Cminds\MultiUserAccounts\Model\Config\Source\Notification</source_model>
+                </field>
+            </group>
+            <group id="new_subaccount"
+                   translate="label"
+                   type="text"
+                   sortOrder="20"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>New Subaccount Options</label>
+                <field id="confirm"
+                       translate="label"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Require Emails Confirmation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="order_approval_request"
+                   translate="label"
+                   type="text"
+                   sortOrder="30"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Order Approval Requests</label>
+                <field id="authorization_required"
+                       translate="label"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Should Order Approval Request Be Authorized</label>
+                    <comment>
+                        <![CDATA[
+                            Enable this option if order approval request before
+                            being approved, should be first authorized by sub-accounts
+                            starting from lowest range up to sub-account
+                            which will be able then to approve it. If there are
+                            few sub-accounts on the same range, only one of them
+                            should authorize request.
+                        ]]>
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+        <section id="parentaccount"
+                 translate="label"
+                 type="text"
+                 sortOrder="130"
+                 showInDefault="1"
+                 showInWebsite="1"
+                 showInStore="1">
+            <label>Parent Accounts Configuration</label>
+            <tab>cminds_multiuseraccounts</tab>
+            <resource>Cminds_MultiUserAccounts::configuration</resource>
+            <group id="general"
+                   translate="label"
+                   type="text"
+                   sortOrder="10"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>General Options</label>
+                <field id="can_manage"
+                       translate="label"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Allow Parent Accounts To Manage Subaccounts</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="new_customer"
+                   translate="label"
+                   type="text"
+                   sortOrder="20"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>New Customer Accounts Options</label>
+                <field id="can_manage"
+                       translate="label"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>New Customer Became Parent Account</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="order_approval_request"
+                   translate="label"
+                   type="text"
+                   sortOrder="30"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Order Approval Requests</label>
+                <field id="parentaccount_all_notification"
+                       translate="label"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Should Parent Account Receive All Order Approval Requests Notifications</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

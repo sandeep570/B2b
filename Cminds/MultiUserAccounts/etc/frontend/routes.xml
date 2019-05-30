@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts routes config.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ * @license  https://www.cminds.com/cm-magento-extentions-license-details CreativeMinds Magento Extensions License
+ * @link     https://www.cminds.com/ecommerce-extensions-store/multi-user-account-extension-for-magento-2-by-creativeminds
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="subaccounts" frontName="subaccounts">
+            <module name="Cminds_MultiUserAccounts"/>
+        </route>
+    </router>
+</config>

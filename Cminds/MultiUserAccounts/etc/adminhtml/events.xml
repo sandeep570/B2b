@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts adminhtml events config.
+ *
+ * @category Cminds
+ * @package  Cminds_MultiUserAccounts
+ * @author   Piotr Pierzak <piotr@cminds.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="admin_system_config_changed_section_customer">
+        <observer name="cminds_multiuseraccounts_admin_customer_config_update"
+                  instance="Cminds\MultiUserAccounts\Observer\Adminhtml\Config\EmailConfirmation"/>
+    </event>
+    <event name="admin_system_config_changed_section_subaccount">
+        <observer name="cminds_multiuseraccounts_admin_subaccount_config_update"
+                  instance="Cminds\MultiUserAccounts\Observer\Adminhtml\Config\EmailConfirmation"/>
+    </event>
+</config>

@@ -1,0 +1,125 @@
+<?php
+/**
+ * Cminds MultiUserAccounts waiting for approve orders list template.
+ *
+ * @category    Cminds
+ * @package     Cminds_MultiUserAccounts
+ * @author      Piotr Pierzak <piotr@cminds.com>
+ */
+?>
+<?php
+/**
+ * @var \Cminds\MultiUserAccounts\Block\Order\Approve\Table $block
+ */
+?>
+<?php $quotes = $block->getQuotes(); ?>
+<?php if ($quotes && count($quotes)): ?>
+    <div class="table-wrapper order-approve-manage">
+        <table class="data table table-order-items orders" id="order-approve-manage-table">
+            <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Orders Waiting For Approval') ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col email"><?php /* @escapeNotVerified */ echo __('Email') ?></th>
+                <th scope="col" class="col name"><?php /* @escapeNotVerified */ echo __('Name') ?></th>
+                <th scope="col" class="col items-qty"><?php /* @escapeNotVerified */ echo __('Items Qty') ?></th>
+                <th scope="col" class="col grand-total"><?php /* @escapeNotVerified */ echo __('Grand Total') ?></th>
+                <th scope="col" class="col actions">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($quotes as $quote): ?>
+                <?php $name = trim($quote->getCustomerFirstname() . ' ' . $quote->getCustomerLastname()); ?>
+                <tr class="quote-info" data-quote-id="<?php echo $quote->getId(); ?>">
+                    <td data-th="<?php echo $block->escapeHtml(__('Email')) ?>"
+                        class="col email"><?php echo $block->escapeHtml($quote->getCustomerEmail()) ?></td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Name')) ?>"
+                        class="col name"><?php echo $block->escapeHtml($name) ?></td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Items Qty')) ?>"
+                        class="col name"><?php echo $block->escapeHtml($quote->getItemsQty()) ?></td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Grand Total')) ?>"
+                        class="col name"><?php echo $block->getPriceHtml($quote->getGrandTotal(), $quote->getStoreId()) ?></td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>"
+                        class="col actions">
+                        <a href="#" class="action show-items">
+                            <span><?php /* @escapeNotVerified */ echo __('Show Items') ?></span>
+                        </a>
+                        <?php if ((int)$quote->getIsAuthorized() === 1): ?>
+                        <form action="<?php /* @escapeNotVerified */ echo $block->getApproveUrl($quote) ?>" method="post">
+                            <a href="#" class="action approve">
+                                <span><?php /* @escapeNotVerified */ echo __('Approve') ?></span>
+                            </a>
+                        </form>
+                        <?php endif; ?>
+                        <?php if ((int)$quote->getIsAuthorized() === 0): ?>
+                            <form action="<?php /* @escapeNotVerified */ echo $block->getAuthorizeUrl($quote) ?>" method="post">
+                                <a href="#" class="action authorize">
+                                    <span><?php /* @escapeNotVerified */ echo __('Authorize') ?></span>
+                                </a>
+                            </form>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr style="display:none;" class="quote-items" data-quote-id="<?php echo $quote->getId(); ?>">
+                    <td colspan="5">
+                        <table id="order-approve-manage-items-table" class="items data table">
+                            <thead>
+                                <tr>
+                                    <th class="col item" scope="col"><span><?php /* @escapeNotVerified */ echo __('Item') ?></span></th>
+                                    <th class="col price" scope="col"><span><?php /* @escapeNotVerified */ echo __('Price') ?></span></th>
+                                    <th class="col qty" scope="col"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></th>
+                                    <th class="col subtotal" scope="col"><span><?php /* @escapeNotVerified */ echo __('Subtotal') ?></span></th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($block->getQuoteItems($quote->getId()) as $item): ?>
+                                <?php echo $block->getItemHtml($item) ?>
+                            <?php endforeach ?>
+                        </table>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            require([ 'jquery'], function($) {
+                $(function() {
+                    $('#order-approve-manage-table a.approve').bind('click', function() {
+                        if (confirm('<?php echo __('Are you sure that you want to approve this order?') ?>')) {
+                            $(this).closest('form').submit();
+                        }
+                    });
+
+                    $('#order-approve-manage-table a.authorize').bind('click', function() {
+                        if (confirm('<?php echo __('Are you sure that you want to authorize this order?') ?>')) {
+                            $(this).closest('form').submit();
+                        }
+                    });
+
+                    $('#order-approve-manage-table a.show-items').bind('click', function() {
+                        var quoteId = $(this).closest('tr').attr('data-quote-id'),
+                            quoteItemsContainer = $('tr.quote-items[data-quote-id=' + quoteId + ']');
+
+                        if (quoteItemsContainer.is(':visible')) {
+                            quoteItemsContainer.hide();
+                            $(this)
+                                .removeClass('active')
+                                .html('<?php echo __('Show Items') ?>');
+                        } else {
+                            $('#order-approve-manage-table a.show-items.active').trigger('click');
+                            quoteItemsContainer.show();
+                            $(this)
+                                .addClass('active')
+                                .html('<?php echo __('Hide Items') ?>');
+                        }
+                    });
+                });
+            });
+        </script>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?php /* @escapeNotVerified */ echo __('There are not waiting orders to display.'); ?></span>
+    </div>
+<?php endif ?>

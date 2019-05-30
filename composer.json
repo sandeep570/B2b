@@ -1,0 +1,28 @@
+{
+    "name": "kensiumgitlab/OpenSourceB2BModules",
+    "description": "A B2B modules package",
+    "version": "2.0.1",
+    "type": "magento2-module",
+    "require": {
+       
+     },
+	"extra": {
+        "map": [
+            [
+                "*",
+                "kensiumgitlab/OpenSourceB2BModules"
+            ]
+        ]
+    },
+	"extra": {
+        "installer-paths": {
+            "app/code/Vendor/Module": ["type:library"]
+        }
+    },
+    "repositories": {
+        "kensiumgitlab/OpenSourceB2BModules": {
+            "type": "vcs",
+            "url": "https://gitlab.kensium.com/kensiumgitlab/OpenSourceB2BModules.git"
+        }
+    }
+}
