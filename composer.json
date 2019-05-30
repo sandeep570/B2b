@@ -2,9 +2,28 @@
   "name": "cminds/module-multiuseraccounts",
   "description": "N/A",
   "require": {
-    "php": "~5.5.0|~5.6.0|~7.0.0|~7.1.0",
-    "monolog/monolog": ">=1.1.7"
+    "php": "~5.5.0|~5.6.0|~7.0.0|~7.1.0"
   },
   "type": "magento2-module",
-  "version": "1.1.7"
+  "version": "1.1.7",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Creative Minds",
+      "email": "info@cminds.com",
+      "homepage": "https://www.cminds.com/",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Cminds\\MultiUserAccounts\\": ""
+    }
+  }
 }
