@@ -10,14 +10,6 @@
     "OSL-3.0",
     "AFL-3.0"
   ],
-  "authors": [
-    {
-      "name": "Creative Minds",
-      "email": "info@cminds.com",
-      "homepage": "https://www.cminds.com/",
-      "role": "Developer"
-    }
-  ],
   "autoload": {
     "files": [
       "registration.php"
