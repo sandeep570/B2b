@@ -1,28 +1,29 @@
 {
-    "name": "kensiumgitlab/OpenSourceB2BModules",
-    "description": "A B2B modules package",
-    "version": "2.0.1",
-    "type": "magento2-module",
-    "require": {
-       
-     },
-	"extra": {
-        "map": [
-            [
-                "*",
-                "kensiumgitlab/OpenSourceB2BModules"
-            ]
-        ]
-    },
-	"extra": {
-        "installer-paths": {
-            "app/code/Vendor/Module": ["type:library"]
-        }
-    },
-    "repositories": {
-        "kensiumgitlab/OpenSourceB2BModules": {
-            "type": "vcs",
-            "url": "https://gitlab.kensium.com/kensiumgitlab/OpenSourceB2BModules.git"
-        }
+  "name": "cminds/module-multiuseraccounts",
+  "description": "N/A",
+  "require": {
+    "php": "~5.5.0|~5.6.0|~7.0.0|~7.1.0"
+  },
+  "type": "magento2-module",
+  "version": "1.1.7",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Creative Minds",
+      "email": "info@cminds.com",
+      "homepage": "https://www.cminds.com/",
+      "role": "Developer"
     }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Cminds\\MultiUserAccounts\\": ""
+    }
+  }
 }
